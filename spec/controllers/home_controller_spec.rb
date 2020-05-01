@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe HomeController, type: :controller do
-  let(:patient) { Patient.last }
+  let(:patient) { create(:patient) }
 
   describe 'GET #unblock' do
     context 'when patient exists' do
       it 'unblocks the patient' do
         get :unblock, params: { cpf: patient.cpf }
 
-        expect(response.body).to eq("<h1>#{patient.name} desbloqueado!</h1>")
+        expect(response.body).to eq("<h1>#{patient.name.titleize} desbloqueado!</h1>")
       end
     end
 
